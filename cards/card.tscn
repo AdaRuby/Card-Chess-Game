@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://bdonxyy7xmfux"]
+
+[ext_resource type="Script" path="res://cards/card.gd" id="1_xi33q"]
+[ext_resource type="Texture2D" uid="uid://bb0slr5uj2vyp" path="res://icon.svg" id="2_d81jh"]
+[ext_resource type="FontFile" uid="uid://cac7mfbacrt4q" path="res://assets/fonts/CaslonAntique.ttf" id="3_lbtif"]
+[ext_resource type="Texture2D" uid="uid://cr0brpkue0eo6" path="res://assets/sprites/button_idle_blank.png" id="4_upfpo"]
+[ext_resource type="FontFile" uid="uid://dq4lhrkmoxw8u" path="res://assets/fonts/Arrose-Regular.otf" id="5_lcor8"]
+
+[sub_resource type="Curve" id="Curve_1uksd"]
+_data = [Vector2(0.130742, 0.682014), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_0ikx0"]
+curve = SubResource("Curve_1uksd")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrq4k"]
+size = Vector2(300, 400)
+
+[node name="card" type="Node2D" groups=["card"]]
+script = ExtResource("1_xi33q")
+
+[node name="card_base" type="Sprite2D" parent="."]
+texture = SubResource("CurveTexture_0ikx0")
+region_enabled = true
+region_rect = Rect2(0, 0, 300, 400)
+
+[node name="card_image" type="Sprite2D" parent="."]
+position = Vector2(-75, -100)
+texture = ExtResource("2_d81jh")
+region_enabled = true
+region_rect = Rect2(0, 0, 130, 175)
+
+[node name="card_description" type="Label" parent="."]
+offset_left = -140.0
+offset_right = 140.0
+offset_bottom = 190.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "описание базовой карты! очень важное описание. и очень секретное..."
+autowrap_mode = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_yrq4k")
+
+[node name="Confirm_chosen_piece" type="Button" parent="."]
+visible = false
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_right = 260.0
+offset_bottom = 80.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_lbtif")
+theme_override_font_sizes/font_size = 32
+text = "Confirm chosen piece"
+icon = ExtResource("4_upfpo")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="button_warning" type="Label" parent="Confirm_chosen_piece"]
+visible = false
+layout_mode = 0
+offset_top = -30.0
+offset_right = 260.0
+offset_bottom = 10.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lbtif")
+theme_override_font_sizes/font_size = 32
+text = "Choose a piece!"
+horizontal_alignment = 1
+
+[node name="effect_label" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="energy_label" type="Label" parent="."]
+offset_left = 100.0
+offset_top = -185.0
+offset_right = 140.0
+offset_bottom = -150.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_lcor8")
+theme_override_font_sizes/font_size = 30
+text = "1"
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="pressed" from="Confirm_chosen_piece" to="." method="_on_confirm_chosen_piece_pressed"]

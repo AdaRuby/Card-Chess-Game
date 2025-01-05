@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://jlnrptyvot26"]
+
+[ext_resource type="Script" path="res://main_game_scene/deck.gd" id="1_1oapq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjper"]
+size = Vector2(153, 229)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ef1x"]
+size = Vector2(153, 229)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1layu"]
+specular_color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+
+[node name="Deck" type="Node2D"]
+position = Vector2(-530, 420)
+script = ExtResource("1_1oapq")
+
+[node name="Area2D_w" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_w"]
+visible = false
+position = Vector2(-30.5, -115.5)
+shape = SubResource("RectangleShape2D_wjper")
+disabled = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D_w"]
+modulate = Color(1, 1, 1, 0.196078)
+position = Vector2(781, -359)
+polygon = PackedVector2Array(-777, 359, -660, 129, -831, 129, -939, 302, -939, 359)
+
+[node name="Area2D_b" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_b"]
+visible = false
+position = Vector2(-30.5, -115.5)
+shape = SubResource("RectangleShape2D_0ef1x")
+disabled = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D_b"]
+modulate = Color(1, 1, 1, 0.196078)
+position = Vector2(781, -359)
+polygon = PackedVector2Array(-777, 359, -660, 129, -831, 129, -939, 302, -939, 359)
+
+[node name="Sprite2D_w" type="Sprite2D" parent="."]
+visible = false
+z_index = -2
+position = Vector2(-30, -115.25)
+scale = Vector2(136, 231.5)
+texture = SubResource("CanvasTexture_1layu")
+
+[node name="Sprite2D_b" type="Sprite2D" parent="."]
+visible = false
+z_index = -2
+position = Vector2(-30, -115.25)
+scale = Vector2(136, 231.5)
+texture = SubResource("CanvasTexture_1layu")

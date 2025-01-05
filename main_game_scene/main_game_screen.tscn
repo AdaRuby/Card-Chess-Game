@@ -1,0 +1,727 @@
+[gd_scene load_steps=31 format=3 uid="uid://caqjmhcwe03q3"]
+
+[ext_resource type="Script" path="res://main_game_scene/chess_script.gd" id="1_wvaxe"]
+[ext_resource type="Texture2D" uid="uid://dc5ygvwkgvha5" path="res://models/sprites/chess_sprites_w_knight.png" id="2_cc2u7"]
+[ext_resource type="Texture2D" uid="uid://mglcqrvdmmv1" path="res://models/sprites/chess_sprites_w_bishop.png" id="3_1a00i"]
+[ext_resource type="Texture2D" uid="uid://dt6t11duoakga" path="res://models/sprites/chess_sprites_w_rook.png" id="4_k0lun"]
+[ext_resource type="Texture2D" uid="uid://cxp4r87xs1pm6" path="res://models/sprites/chess_sprites_w_queen.png" id="5_wn46n"]
+[ext_resource type="Texture2D" uid="uid://b4sxqcupcgfq3" path="res://models/sprites/chess_sprites_b_knight.png" id="6_b5dje"]
+[ext_resource type="PackedScene" uid="uid://crsndbnq0g8yb" path="res://cards/card_slote.tscn" id="6_efqoj"]
+[ext_resource type="Texture2D" uid="uid://ck36s5r7c1ul8" path="res://models/sprites/chess_sprites_b_bishop.png" id="7_75kxk"]
+[ext_resource type="PackedScene" uid="uid://dga3saqy00k8u" path="res://cards/card_manager.tscn" id="7_wlimp"]
+[ext_resource type="PackedScene" uid="uid://bls3pfq7tbdlq" path="res://cards/player_hand.tscn" id="8_u20mj"]
+[ext_resource type="Texture2D" uid="uid://dvm6r41ymdo2i" path="res://models/sprites/chess_sprites_b_rook.png" id="8_wujt2"]
+[ext_resource type="PackedScene" uid="uid://cwq4rk2i2dlro" path="res://main_game_scene/player_hand.tscn" id="9_4f1n8"]
+[ext_resource type="Texture2D" uid="uid://b48uo3kqy6hcf" path="res://models/sprites/chess_sprites_b_queen.png" id="9_86ffc"]
+[ext_resource type="PackedScene" uid="uid://jlnrptyvot26" path="res://cards/deck.tscn" id="9_aemsw"]
+[ext_resource type="PackedScene" uid="uid://capolkgn70v6v" path="res://cards/input_manager.tscn" id="10_s1pdx"]
+[ext_resource type="AudioStream" uid="uid://bdr07wlthoak0" path="res://assets/sounds/Wood Block2.mp3" id="13_wbkdo"]
+[ext_resource type="AudioStream" uid="uid://48rwe8ei728o" path="res://assets/sounds/draw.wav" id="16_3ol7m"]
+[ext_resource type="AudioStream" uid="uid://h1v0bc3u5hk" path="res://assets/sounds/Retro11.mp3" id="17_8kge3"]
+[ext_resource type="PackedScene" uid="uid://bgu4alcsme2o6" path="res://shaders/cloud_spatial_shader.tscn" id="18_a22si"]
+[ext_resource type="AudioStream" uid="uid://oliwd47rel3f" path="res://assets/sounds/Abstract1.mp3" id="20_7jtx3"]
+[ext_resource type="Texture2D" uid="uid://c2vfel8nb8fpy" path="res://assets/UI/button.png" id="20_diekn"]
+[ext_resource type="PackedScene" uid="uid://c22wskjostr84" path="res://main_game_scene/deck_scene.tscn" id="21_qrxlv"]
+[ext_resource type="FontFile" uid="uid://dq4lhrkmoxw8u" path="res://assets/fonts/Arrose-Regular.otf" id="22_u5nr7"]
+[ext_resource type="Texture2D" uid="uid://yxkommvq08eb" path="res://assets/sprites/frame.png" id="23_4ecn8"]
+[ext_resource type="FontFile" uid="uid://b2lw3wl3jcnqs" path="res://assets/fonts/ofont.ru_Gehaks.ttf" id="24_wp75o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y833g"]
+size = Vector3(8, 0, 8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ar3k5"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6cwq0"]
+material = SubResource("StandardMaterial3D_ar3k5")
+
+[sub_resource type="BoxMesh" id="BoxMesh_wink6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1h47t"]
+
+[node name="chess" type="Node3D" groups=["main_scene"]]
+script = ExtResource("1_wvaxe")
+
+[node name="temp_board" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="temp_board"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_y833g")
+
+[node name="black blocks" type="Node3D" parent="temp_board"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 1.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 2.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 3.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 3.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 3.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 2.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 1.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 1.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, -0.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -0.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -1.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, -2.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -2.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -3.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -3.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -1.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 2.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 3.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D23" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 2.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D24" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 1.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D25" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 0.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D26" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -0.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D27" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -1.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D28" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -2.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D29" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D30" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -2.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D31" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -1.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="MeshInstance3D32" type="MeshInstance3D" parent="temp_board/black blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -3.5)
+mesh = SubResource("BoxMesh_6cwq0")
+skeleton = NodePath("../../white blocks/MeshInstance3D")
+
+[node name="white blocks" type="Node3D" parent="temp_board"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 1.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 1.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 2.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 3.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 2.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 0.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, -1.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -0.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -1.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -2.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, -3.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -3.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -2.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -1.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -3.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -3.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -2.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -2.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -1.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D23" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -0.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D24" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -0.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D25" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D26" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 1.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D27" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 1.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D28" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 2.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D29" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 2.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D30" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 3.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D31" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 3.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D32" type="MeshInstance3D" parent="temp_board/white blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 3.5)
+mesh = SubResource("BoxMesh_wink6")
+skeleton = NodePath("../../..")
+
+[node name="dots" type="Node3D" parent="."]
+
+[node name="pieces" type="Node3D" parent="."]
+
+[node name="w_camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.71934, 0.694659, 0, -0.694659, 0.71934, 4, 6, 4)
+fov = 49.8577
+
+[node name="promotion_buttons" type="CanvasLayer" parent="w_camera"]
+
+[node name="white_pieces" type="Control" parent="w_camera/promotion_buttons"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="2" type="Button" parent="w_camera/promotion_buttons/white_pieces" groups=["white_pieces"]]
+layout_mode = 0
+offset_left = -400.0
+offset_right = -200.0
+offset_bottom = 300.0
+icon = ExtResource("2_cc2u7")
+icon_alignment = 1
+expand_icon = true
+
+[node name="3" type="Button" parent="w_camera/promotion_buttons/white_pieces" groups=["white_pieces"]]
+layout_mode = 0
+offset_left = -200.0
+offset_bottom = 300.0
+icon = ExtResource("3_1a00i")
+icon_alignment = 1
+expand_icon = true
+
+[node name="4" type="Button" parent="w_camera/promotion_buttons/white_pieces" groups=["white_pieces"]]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 300.0
+icon = ExtResource("4_k0lun")
+icon_alignment = 1
+expand_icon = true
+
+[node name="5" type="Button" parent="w_camera/promotion_buttons/white_pieces" groups=["white_pieces"]]
+layout_mode = 0
+offset_left = 200.0
+offset_right = 400.0
+offset_bottom = 300.0
+icon = ExtResource("5_wn46n")
+icon_alignment = 1
+expand_icon = true
+
+[node name="w_cards" type="Control" parent="w_camera"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CardSlote" parent="w_camera/w_cards" instance=ExtResource("6_efqoj")]
+
+[node name="card_manager" parent="w_camera/w_cards" instance=ExtResource("7_wlimp")]
+position = Vector2(-640, -360)
+
+[node name="Deck" parent="w_camera/w_cards" groups=["w_deck"] instance=ExtResource("9_aemsw")]
+position = Vector2(-800, 380)
+
+[node name="PlayerHand" parent="w_camera/w_cards" groups=["w_hand"] instance=ExtResource("9_4f1n8")]
+
+[node name="InputManager" parent="." instance=ExtResource("10_s1pdx")]
+position = Vector2(640, 360)
+
+[node name="b_camera" type="Camera3D" parent="."]
+transform = Transform3D(-1, -6.0729e-08, 6.28867e-08, 0, 0.71934, 0.694659, -8.74228e-08, 0.694659, -0.71934, 4, 6, -12)
+fov = 49.8577
+
+[node name="promotion_buttons" type="CanvasLayer" parent="b_camera"]
+
+[node name="black_pieces" type="Control" parent="b_camera/promotion_buttons"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="2" type="Button" parent="b_camera/promotion_buttons/black_pieces" groups=["black_pieces"]]
+layout_mode = 0
+offset_left = -400.0
+offset_right = -200.0
+offset_bottom = 300.0
+icon = ExtResource("6_b5dje")
+icon_alignment = 1
+expand_icon = true
+
+[node name="3" type="Button" parent="b_camera/promotion_buttons/black_pieces" groups=["black_pieces"]]
+layout_mode = 0
+offset_left = -200.0
+offset_bottom = 300.0
+icon = ExtResource("7_75kxk")
+icon_alignment = 1
+expand_icon = true
+
+[node name="4" type="Button" parent="b_camera/promotion_buttons/black_pieces" groups=["black_pieces"]]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 300.0
+icon = ExtResource("8_wujt2")
+icon_alignment = 1
+expand_icon = true
+
+[node name="5" type="Button" parent="b_camera/promotion_buttons/black_pieces" groups=["black_pieces"]]
+layout_mode = 0
+offset_left = 200.0
+offset_right = 400.0
+offset_bottom = 300.0
+icon = ExtResource("9_86ffc")
+icon_alignment = 1
+expand_icon = true
+
+[node name="b_cards" type="Control" parent="b_camera"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CardSlote_b" parent="b_camera/b_cards" instance=ExtResource("6_efqoj")]
+
+[node name="card_manager_b" parent="b_camera/b_cards" instance=ExtResource("7_wlimp")]
+position = Vector2(-640, -360)
+
+[node name="PlayerHand_b" parent="b_camera/b_cards" groups=["b_hand"] instance=ExtResource("8_u20mj")]
+
+[node name="Deck_b" parent="b_camera/b_cards" groups=["b_deck"] instance=ExtResource("9_aemsw")]
+position = Vector2(-800, 380)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.64462, 4.1119, -3)
+visible = false
+light_color = Color(0.642774, 0.823199, 0.8752, 1)
+light_energy = 5.666
+light_volumetric_fog_energy = 4.556
+light_negative = true
+omni_range = 11.112
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://technical_scenes/player.tscn")
+spawn_path = NodePath("../Players")
+spawn_limit = 2
+
+[node name="Players" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, -4)
+
+[node name="cloud" parent="." instance=ExtResource("18_a22si")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.64532, -0.633545, -2.84241)
+
+[node name="sounds" type="Node" parent="."]
+
+[node name="piece_move_sound" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource("13_wbkdo")
+bus = &"SoundFX"
+
+[node name="draw_card_sound" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource("16_3ol7m")
+bus = &"SoundFX"
+
+[node name="hand_full_sound" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource("17_8kge3")
+bus = &"SoundFX"
+
+[node name="button_sound" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource("20_7jtx3")
+bus = &"SoundFX"
+
+[node name="effects" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="light_off" type="ColorRect" parent="effects" groups=["light_off"]]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 0.784314)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(138.375, 46.875)
+scale = Vector2(1.125, 1.47628)
+texture = ExtResource("20_diekn")
+
+[node name="labels" type="VBoxContainer" parent="."]
+offset_left = 22.0
+offset_top = 23.0
+offset_right = 62.0
+offset_bottom = 97.0
+
+[node name="side_count" type="Label" parent="labels"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="side_label" type="Label" parent="labels"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="effect_label" type="Label" parent="labels"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="deck_label" type="Label" parent="."]
+offset_left = 100.0
+offset_top = 650.0
+offset_right = 140.0
+offset_bottom = 673.0
+
+[node name="light" type="Node3D" parent="."]
+
+[node name="above_light" type="SpotLight3D" parent="light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, -4)
+light_energy = 3.0
+spot_range = 9.0
+spot_angle = 180.0
+spot_angle_attenuation = 0.0035205
+
+[node name="side_light_w" type="SpotLight3D" parent="light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 0)
+light_energy = 3.0
+spot_range = 6.0
+spot_angle = 90.0
+spot_angle_attenuation = 0.0035205
+
+[node name="side_light_b" type="SpotLight3D" parent="light"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 4, 3, -8)
+light_energy = 3.0
+spot_range = 6.0
+spot_angle = 90.0
+spot_angle_attenuation = 0.0035205
+
+[node name="decks" type="Node3D" parent="."]
+
+[node name="deck_w" parent="decks" instance=ExtResource("21_qrxlv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="deck_b" parent="decks" instance=ExtResource("21_qrxlv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -8)
+
+[node name="energy" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 150.0
+offset_top = 550.0
+offset_right = 150.0
+offset_bottom = 550.0
+
+[node name="Sprite2D" type="Sprite2D" parent="energy"]
+position = Vector2(18, 0)
+scale = Vector2(0.4, 1.5)
+texture = ExtResource("20_diekn")
+
+[node name="energy_label" type="Label" parent="energy"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = -22.0
+offset_right = 32.0
+offset_bottom = 13.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("22_u5nr7")
+theme_override_font_sizes/font_size = 30
+text = "1/4"
+
+[node name="final_screen" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="final_screen"]
+modulate = Color(0, 0.627451, 1, 1)
+texture = ExtResource("23_4ecn8")
+
+[node name="final_text" type="Label" parent="final_screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.5
+offset_top = -11.5
+offset_right = 148.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("24_wp75o")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+
+[node name="final_button" type="Button" parent="final_screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.0
+offset_top = 30.0
+offset_right = 161.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("24_wp75o")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1h47t")
+text = "
+Выход"
+icon = ExtResource("20_diekn")
+flat = true
+icon_alignment = 1
+
+[connection signal="pressed" from="final_screen/final_button" to="." method="_on_final_button_pressed"]

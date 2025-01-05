@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bls3pfq7tbdlq"]
+
+[ext_resource type="Script" path="res://main_game_scene/PlayerHand.gd" id="1_ddo0t"]
+
+[node name="PlayerHand" type="Node2D"]
+position = Vector2(-640, -360)
+script = ExtResource("1_ddo0t")

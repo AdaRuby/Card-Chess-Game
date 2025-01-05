@@ -1,0 +1,118 @@
+[gd_scene load_steps=11 format=3 uid="uid://shbdqxkhryyd"]
+
+[ext_resource type="Script" path="res://main_game_scene/character_choice.gd" id="1_amnor"]
+[ext_resource type="Texture2D" uid="uid://dak15pr67lg3" path="res://assets/sprites/ladia.png" id="1_eq84u"]
+[ext_resource type="Texture2D" uid="uid://c2vfel8nb8fpy" path="res://assets/UI/button.png" id="3_h17h1"]
+[ext_resource type="FontFile" uid="uid://hflj7jov3ig8" path="res://assets/fonts/Ebbe Thin.ttf" id="3_xberj"]
+[ext_resource type="Texture2D" uid="uid://wdd1nb8wdi7u" path="res://assets/UI/arrow.png" id="4_tlkdk"]
+[ext_resource type="Texture2D" uid="uid://uljdw1amb5a0" path="res://assets/UI/arrow back.png" id="5_td7dn"]
+[ext_resource type="Texture2D" uid="uid://cmfs8v6yy72xp" path="res://assets/UI/frame.png" id="6_8xmxu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4shkq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tqj5c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2rjlm"]
+
+[node name="Character_choice" type="Control"]
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_amnor")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -248.0
+offset_top = -118.0
+offset_right = 1929.0
+offset_bottom = 983.0
+scale = Vector2(1.11272, 1.22304)
+color = Color(0.203535, 0.193582, 0.324651, 1)
+
+[node name="Character" type="Sprite2D" parent="."]
+position = Vector2(516, 453)
+scale = Vector2(1.06694, 1.09554)
+texture = ExtResource("1_eq84u")
+
+[node name="name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1126.0
+offset_top = 67.0
+offset_right = 1310.0
+offset_bottom = 92.0
+scale = Vector2(3.56, 4.24)
+theme_override_fonts/font = ExtResource("3_xberj")
+theme_override_font_sizes/font_size = 40
+text = "Ладья. Защитница."
+
+[node name="description" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1115.0
+offset_top = 241.0
+offset_right = 1375.0
+offset_bottom = 403.0
+scale = Vector2(2.72, 2.84)
+theme_override_fonts/font = ExtResource("3_xberj")
+theme_override_font_sizes/font_size = 20
+text = "ОПИСАНИЕ."
+autowrap_mode = 2
+
+[node name="Hand_of_card" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 1142.0
+offset_top = 723.0
+offset_right = 1182.0
+offset_bottom = 763.0
+
+[node name="Deck" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1121.0
+offset_top = 693.0
+offset_right = 1161.0
+offset_bottom = 716.0
+scale = Vector2(1.96, 2.76)
+theme_override_fonts/font = ExtResource("3_xberj")
+theme_override_font_sizes/font_size = 30
+text = "Специальные карты:"
+
+[node name="Choice" type="Button" parent="."]
+layout_mode = 0
+offset_left = 348.0
+offset_top = 910.0
+offset_right = 670.0
+offset_bottom = 1055.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4shkq")
+icon = ExtResource("3_h17h1")
+flat = true
+
+[node name="Next" type="Button" parent="."]
+layout_mode = 0
+offset_left = 862.0
+offset_top = 498.0
+offset_right = 1025.0
+offset_bottom = 590.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tqj5c")
+icon = ExtResource("4_tlkdk")
+flat = true
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 498.0
+offset_right = 159.0
+offset_bottom = 590.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2rjlm")
+icon = ExtResource("5_td7dn")
+flat = true
+
+[node name="Frame" type="Sprite2D" parent="."]
+position = Vector2(546, 510)
+texture = ExtResource("6_8xmxu")
+
+[connection signal="pressed" from="Choice" to="." method="_on_choice_pressed"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

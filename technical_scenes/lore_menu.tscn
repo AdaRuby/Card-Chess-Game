@@ -1,0 +1,104 @@
+[gd_scene load_steps=12 format=3 uid="uid://yw6h1chgidp"]
+
+[ext_resource type="Script" path="res://technical_scenes/lore_menu.gd" id="1_y6ffp"]
+[ext_resource type="Texture2D" uid="uid://wdd1nb8wdi7u" path="res://assets/UI/arrow.png" id="2_4jyhf"]
+[ext_resource type="Texture2D" uid="uid://b8yva3p08c3cw" path="res://assets/UI/pattern up.png" id="3_nr1o7"]
+[ext_resource type="AudioStream" uid="uid://oliwd47rel3f" path="res://assets/sounds/Abstract1.mp3" id="4_4ky5k"]
+[ext_resource type="Texture2D" uid="uid://birfw7dv8ncja" path="res://assets/UI/back.png" id="4_7kpjm"]
+[ext_resource type="Texture2D" uid="uid://bt623fenlbj20" path="res://assets/UI/pattern down.png" id="6_xrnym"]
+[ext_resource type="Texture2D" uid="uid://b7que81aq7jqs" path="res://assets/UI/razdel.png" id="7_tnp7s"]
+[ext_resource type="PackedScene" uid="uid://lv4w05vk03nd" path="res://shaders/liquid_shader.tscn" id="8_oxcnw"]
+[ext_resource type="Texture2D" uid="uid://dak15pr67lg3" path="res://assets/sprites/ladia.png" id="9_xbx8p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y8lb4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h26sf"]
+
+[node name="Lore_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_y6ffp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(1.1, 1.1)
+color = Color(0.0784314, 0.0784314, 0.396078, 1)
+
+[node name="liquid_shader" parent="." instance=ExtResource("8_oxcnw")]
+position = Vector2(-65, 0)
+scale = Vector2(2.68284, 2.4)
+
+[node name="Next_arrow" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1750.0
+offset_top = 512.0
+offset_right = 1913.0
+offset_bottom = 604.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_y8lb4")
+icon = ExtResource("2_4jyhf")
+flat = true
+
+[node name="pattern uo" type="Sprite2D" parent="."]
+position = Vector2(960, 106)
+scale = Vector2(1.5, 1.1)
+texture = ExtResource("3_nr1o7")
+
+[node name="back_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1770.0
+offset_top = 40.0
+offset_right = 1933.0
+offset_bottom = 142.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h26sf")
+icon = ExtResource("4_7kpjm")
+flat = true
+
+[node name="button_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4ky5k")
+bus = &"SoundFX"
+
+[node name="pattern down" type="Sprite2D" parent="."]
+position = Vector2(960, 960)
+scale = Vector2(1.4, 1)
+texture = ExtResource("6_xrnym")
+
+[node name="razdel" type="Sprite2D" parent="."]
+position = Vector2(990, 530)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("7_tnp7s")
+
+[node name="character" type="Sprite2D" parent="."]
+position = Vector2(491, 539)
+scale = Vector2(1.28264, 1.26569)
+texture = ExtResource("9_xbx8p")
+
+[node name="name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1226.0
+offset_top = 81.0
+offset_right = 1266.0
+offset_bottom = 103.333
+scale = Vector2(7.04, 4.72)
+text = "f"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 1089.0
+offset_top = 238.0
+offset_right = 1129.0
+offset_bottom = 278.0
+scale = Vector2(16.44, 16.4)
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 3
+text = "f"
+autowrap_mode = 2
+
+[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]

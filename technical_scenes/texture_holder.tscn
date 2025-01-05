@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://najkj0hu6k03"]
+
+[node name="texture_holder" type="MeshInstance3D"]

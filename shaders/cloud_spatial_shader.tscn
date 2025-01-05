@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://bgu4alcsme2o6"]
+
+[ext_resource type="Shader" path="res://main_game_scene/heaven.gdshader" id="1_4ua12"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y17j6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dcada"]
+noise = SubResource("FastNoiseLite_y17j6")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_60753"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hjjqy"]
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_60753")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2dclk"]
+render_priority = 0
+shader = ExtResource("1_4ua12")
+shader_parameter/height_scale = 0.7
+shader_parameter/noise = SubResource("NoiseTexture2D_dcada")
+shader_parameter/normalmap = SubResource("NoiseTexture2D_hjjqy")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_y3uln"]
+material = SubResource("ShaderMaterial_2dclk")
+size = Vector2(18, 18)
+subdivide_width = 32
+subdivide_depth = 32
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.078125, -0.0657349, 0)
+mesh = SubResource("PlaneMesh_y3uln")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.368286, 0.875, 0.0604248)
+visible = false
+light_color = Color(0.571454, 0.973721, 0.946362, 1)
+light_energy = 1.555
+light_size = 0.834
+light_specular = 2.222
+omni_range = 11.1179

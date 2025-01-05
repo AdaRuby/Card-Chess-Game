@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://lv4w05vk03nd"]
+
+[ext_resource type="Shader" path="res://shaders/liquid.gdshader" id="1_dlu05"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iyfgs"]
+shader = ExtResource("1_dlu05")
+shader_parameter/wave_crop = 0.77
+shader_parameter/zoom = 10.4
+shader_parameter/brightness = 4.05
+shader_parameter/speed = 0.37
+shader_parameter/iterations = 9
+shader_parameter/freq_start = 3.1
+shader_parameter/freq_coeff = 1.16
+
+[node name="liquid_shader" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_iyfgs")
+offset_right = 800.0
+offset_bottom = 500.0
+size_flags_stretch_ratio = 0.0

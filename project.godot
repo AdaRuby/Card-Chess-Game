@@ -1,0 +1,52 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Card Chess"
+run/main_scene="res://main_game_scene/main_game_screen.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+PlayerInfo="*res://scripts/PlayerInfo.gd"
+GameManadger="*res://scripts/GameManadger.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="viewport"
+
+[global_group]
+
+black_pieces=""
+white_pieces=""
+main_scene=""
+card=""
+light_off=""
+w_hand=""
+b_hand=""
+w_deck=""
+b_deck=""
+
+[gui]
+
+theme/default_font_hinting=2
+theme/default_font_multichannel_signed_distance_field=true
+theme/lcd_subpixel_layout=0
+
+[layer_names]
+
+2d_render/layer_2="card slot"
+2d_render/layer_3="deck"
+2d_physics/layer_2="card slot"
+2d_physics/layer_3="deck"

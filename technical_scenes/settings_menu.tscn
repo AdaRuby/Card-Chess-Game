@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqpbhuhpfit76"]
+
+[ext_resource type="Script" path="res://settings_menu.gd" id="1_4f31i"]
+[ext_resource type="AudioStream" uid="uid://dvguc2pqth0g0" path="res://assets/music/amb1.mp3" id="2_hgbfm"]
+[ext_resource type="AudioStream" uid="uid://oliwd47rel3f" path="res://assets/sounds/Abstract1.mp3" id="3_gysb1"]
+[ext_resource type="Texture2D" uid="uid://birfw7dv8ncja" path="res://assets/UI/back.png" id="4_oykwl"]
+
+[node name="Settings_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4f31i")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Volume" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Volume"
+
+[node name="Volume_slider" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Mute" type="CheckBox" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Mute"
+
+[node name="Resolutions" type="OptionButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "1920х1080"
+popup/item_1/text = "1600х900"
+popup/item_1/id = 1
+popup/item_2/text = "1280х720"
+popup/item_2/id = 2
+
+[node name="Window_modes" type="OptionButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+item_count = 4
+popup/item_0/text = "Полный экран"
+popup/item_1/text = "Оконный режим"
+popup/item_1/id = 1
+popup/item_2/text = "Оконный режим без рамок"
+popup/item_2/id = 2
+popup/item_3/text = "Полный экран с рамками"
+popup/item_3/id = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_hgbfm")
+autoplay = true
+parameters/looping = true
+
+[node name="button_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gysb1")
+bus = &"SoundFX"
+
+[node name="back_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1779.0
+offset_top = 153.0
+offset_right = 1942.0
+offset_bottom = 255.0
+icon = ExtResource("4_oykwl")
+flat = true
+
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/Volume_slider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/Mute" to="." method="_on_mute_toggled"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/Resolutions" to="." method="_on_resolutions_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/Window_modes" to="." method="_on_window_modes_item_selected"]
+[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]
